@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import CustomSelect from "./CustomSelect";
 import ImageUpload from "./ImageUpload";
 import VendorToggle from "./VendorToggle";
-import { GlobeIcon } from "./Icons";
+import { GlobeIcon, Star } from "./Icons";
 import { underLedgerData } from "./Helper";
+import { toast } from "react-toastify";
 
 const Form = () => {
   const initialState = {
@@ -22,6 +23,8 @@ const Form = () => {
     imgUrl: "",
   };
   const [formData, setFormData] = useState(initialState);
+  const [resetTrigger, setResetTrigger] = useState(false);
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (
@@ -32,6 +35,8 @@ const Form = () => {
     ) {
       console.log(formData, "formdata");
       setFormData(initialState);
+      setResetTrigger(!resetTrigger);
+      toast("Data is added");
     }
   };
   return (
@@ -62,10 +67,10 @@ const Form = () => {
             </div>
             <div className="sm:flex items-center gap-5 mt-5">
               <label
-                className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base"
+                className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base flex gap-1 items-center"
                 htmlFor=""
               >
-                Name
+                Name <Star />
               </label>
               <div className="w-full flex gap-1">
                 <input
@@ -86,10 +91,10 @@ const Form = () => {
             </div>
             <div className="sm:flex items-center gap-5 mt-3">
               <label
-                className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base"
+                className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base flex items-center gap-1"
                 htmlFor=""
               >
-                Print Name
+                Print Name <Star />
               </label>
               <input
                 onChange={(e) =>
@@ -124,10 +129,10 @@ const Form = () => {
             </div>
             <div className="sm:flex items-center gap-5 mt-3">
               <label
-                className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base"
+                className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base flex items-center gap-1"
                 htmlFor=""
               >
-                Code
+                Code <Star />
               </label>
               <div className="w-full flex gap-1">
                 <input
@@ -152,6 +157,8 @@ const Form = () => {
               arr={underLedgerData}
               formData={formData}
               setFormData={setFormData}
+              resetTrigger={resetTrigger}
+              required={true}
             />
             <VendorToggle setFormData={setFormData} formData={formData} />
             <CustomSelect
@@ -160,6 +167,8 @@ const Form = () => {
               arr={underLedgerData}
               formData={formData}
               setFormData={setFormData}
+              resetTrigger={resetTrigger}
+              required={false}
             />
             <CustomSelect
               label="Territory"
@@ -167,6 +176,8 @@ const Form = () => {
               arr={underLedgerData}
               formData={formData}
               setFormData={setFormData}
+              resetTrigger={resetTrigger}
+              required={false}
             />
             <CustomSelect
               label="Vendor Category"
@@ -174,6 +185,8 @@ const Form = () => {
               arr={underLedgerData}
               formData={formData}
               setFormData={setFormData}
+              resetTrigger={resetTrigger}
+              required={false}
             />
             <div className="sm:flex items-center gap-5 mt-3">
               <label
@@ -200,6 +213,7 @@ const Form = () => {
               setFormData={setFormData}
               imgUrl="imgUrl"
               formData={formData}
+              resetTrigger={resetTrigger}
             />
           </div>
         </div>

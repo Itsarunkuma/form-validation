@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { PencilIcon, SelectArrow } from "./Icons";
+import { PencilIcon, SelectArrow, Star } from "./Icons";
 
-const CustomSelect = ({ label, id, arr, formData, setFormData }) => {
+const CustomSelect = ({
+  label,
+  id,
+  arr,
+  formData,
+  setFormData,
+  resetTrigger,
+  required,
+}) => {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
   const [write, setWrite] = useState(false);
@@ -23,14 +31,16 @@ const CustomSelect = ({ label, id, arr, formData, setFormData }) => {
       setShow(false);
     }
   }, [search]);
-
+  useEffect(() => {
+    setSelected("");
+  }, [resetTrigger]);
   return (
     <div className="sm:flex items-center gap-5 mt-3">
       <label
-        className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base"
+        className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base flex items-center gap-1"
         htmlFor={id}
       >
-        {label}
+        {label} {required && <Star />}
       </label>
       <div className="flex w-full gap-1">
         <div className="border w-full rounded-[2px] relative mt-1 sm:mt-0">

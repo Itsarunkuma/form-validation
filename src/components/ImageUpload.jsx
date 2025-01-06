@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CrossIcon } from "./Icons";
 
-const ImageUpload = ({ setFormData, formData, imgUrl }) => {
+const ImageUpload = ({ setFormData, formData, imgUrl, resetTrigger }) => {
   const [image, setImage] = useState(null);
 
   const handleImageChange = (e) => {
@@ -19,7 +19,9 @@ const ImageUpload = ({ setFormData, formData, imgUrl }) => {
   const handleRemoveImage = () => {
     setImage(null);
   };
-
+  useEffect(() => {
+    setImage("");
+  }, [resetTrigger]);
   return (
     <div className="border max-w-[300px] lg:mx-auto">
       <div className="bg-red-400 h-[200px] w-full relative">
