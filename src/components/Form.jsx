@@ -2,6 +2,7 @@ import React from "react";
 import CustomSelect from "./CustomSelect";
 import ImageUpload from "./ImageUpload";
 import VendorToggle from "./VendorToggle";
+import { GlobeIcon } from "./Icons";
 
 const Form = () => {
   return (
@@ -33,13 +34,18 @@ const Form = () => {
               >
                 Name
               </label>
-              <input
-                className="w-full border py-1 px-2 rounded-[2px] mt-1 sm:mt-0"
-                type=""
-                placeholder="Name"
-                name=""
-                id=""
-              />
+              <div className="w-full flex gap-1">
+                <input
+                  className="w-full border py-1 px-2 rounded-[2px] mt-1 sm:mt-0"
+                  type=""
+                  placeholder="Name"
+                  name=""
+                  id=""
+                />
+                <span className="bg-blue-900 p-[6px] rounded-[2px] inline-block">
+                  <GlobeIcon />
+                </span>
+              </div>
             </div>
             <div className="sm:flex items-center gap-5 mt-3">
               <label
@@ -78,13 +84,18 @@ const Form = () => {
               >
                 Code
               </label>
-              <input
-                className="w-full border py-1 px-2 rounded-[2px] mt-1 sm:mt-0"
-                type=""
-                placeholder=""
-                name=""
-                id=""
-              />
+              <div className="w-full flex gap-1">
+                <input
+                  className="w-full border py-1 px-2 rounded-[2px] mt-1 sm:mt-0"
+                  type=""
+                  placeholder=""
+                  name=""
+                  id=""
+                />
+                <span className="bg-blue-900 p-[6px] rounded-[2px] inline-block">
+                  <GlobeIcon />
+                </span>
+              </div>
             </div>
             <CustomSelect />
             <VendorToggle />
