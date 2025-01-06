@@ -104,7 +104,7 @@ const CustomSelect = ({
           <label
             onClick={() => setWrite(true)}
             id={id}
-            className="bg-blue-900 p-[6px] rounded-[2px] flex flex-col justify-center items-center cursor-pointer"
+            className="bg-blue-900 sm:p-[6px] p-1 rounded-[2px] flex flex-col justify-center items-center cursor-pointer mt-1 sm:mt-0"
           >
             <PencilIcon />
           </label>

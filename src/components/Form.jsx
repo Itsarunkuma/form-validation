@@ -74,6 +74,7 @@ const Form = () => {
               </label>
               <div className="w-full flex gap-1">
                 <input
+                  required
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
@@ -97,6 +98,7 @@ const Form = () => {
                 Print Name <Star />
               </label>
               <input
+                required
                 onChange={(e) =>
                   setFormData({ ...formData, printName: e.target.value })
                 }
@@ -136,6 +138,7 @@ const Form = () => {
               </label>
               <div className="w-full flex gap-1">
                 <input
+                  required
                   onChange={(e) =>
                     setFormData({ ...formData, code: e.target.value })
                   }
