@@ -1,6 +1,6 @@
 import React from "react";
 
-const VendorToggle = () => {
+const VendorToggle = ({ formData, setFormData }) => {
   return (
     <>
       <div className="sm:flex items-center gap-5 mt-3 justify-between">
@@ -10,9 +10,18 @@ const VendorToggle = () => {
         >
           Vendor common for Sales Purchase
         </label>
-        <div class="slideThree mt-1 sm:mt-0">
-          <input type="checkbox" value="None" id="common_vendor" name="check" />
-          <label for="common_vendor"></label>
+        <div className="slideThree mt-1 sm:mt-0">
+          <input
+            onChange={(e) =>
+              setFormData({ ...formData, vendorCommon: e.target.value })
+            }
+            type="checkbox"
+            value="None"
+            id="common_vendor"
+            name="check"
+            checked={formData.vendorCommon}
+          />
+          <label htmlFor="common_vendor"></label>
         </div>
       </div>
       <div className="sm:flex items-center gap-5 mt-3 justify-between">
@@ -22,9 +31,18 @@ const VendorToggle = () => {
         >
           Is sub Vendor
         </label>
-        <div class="slideThree mt-1 sm:mt-0">
-          <input type="checkbox" value="None" id="vendor" name="check" />
-          <label for="vendor"></label>
+        <div className="slideThree mt-1 sm:mt-0">
+          <input
+            onChange={(e) =>
+              setFormData({ ...formData, subVendor: e.target.value })
+            }
+            type="checkbox"
+            value="None"
+            id="vendor"
+            name="check2"
+            checked={formData.subVendor}
+          />
+          <label htmlFor="vendor"></label>
         </div>
       </div>
     </>
