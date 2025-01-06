@@ -3,6 +3,7 @@ import CustomSelect from "./CustomSelect";
 import ImageUpload from "./ImageUpload";
 import VendorToggle from "./VendorToggle";
 import { GlobeIcon } from "./Icons";
+import { underLedgerData } from "./Helper";
 
 const Form = () => {
   const initialState = {
@@ -12,8 +13,8 @@ const Form = () => {
     identification: "",
     code: "",
     underLedger: "",
-    vendorCommon: "",
-    subVendor: "",
+    vendorCommon: false,
+    subVendor: false,
     firmStatus: "",
     territory: "",
     vendorCategory: "",
@@ -21,9 +22,21 @@ const Form = () => {
     imgUrl: "",
   };
   const [formData, setFormData] = useState(initialState);
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (
+      formData.name &&
+      formData.printName &&
+      formData.code &&
+      formData.underLedger
+    ) {
+      console.log(formData, "formdata");
+      setFormData(initialState);
+    }
+  };
   return (
     <div className="max-w-[1500px] mx-auto sm:py-10 py-5 sm:px-10 px-5">
-      <form action="">
+      <form action="" onSubmit={onSubmitHandler}>
         <div className="lg:flex gap-10">
           <div className="lg:w-[70%] w-full">
             <div className="sm:flex items-center sm:gap-5 gap-3">
@@ -99,14 +112,14 @@ const Form = () => {
               </label>
               <input
                 onChange={(e) =>
-                  setFormData({ ...formData, printName: e.target.value })
+                  setFormData({ ...formData, identification: e.target.value })
                 }
                 className="w-full border py-1 px-2 rounded-[2px] mt-1 sm:mt-0"
                 type=""
                 placeholder=""
                 name=""
                 id=""
-                value={formData.printName}
+                value={formData.identification}
               />
             </div>
             <div className="sm:flex items-center gap-5 mt-3">
@@ -133,25 +146,35 @@ const Form = () => {
                 </span>
               </div>
             </div>
-            <CustomSelect />
+            <CustomSelect
+              label="Under Ledger"
+              id="underLedger"
+              arr={underLedgerData}
+              formData={formData}
+              setFormData={setFormData}
+            />
             <VendorToggle setFormData={setFormData} formData={formData} />
-            <div className="sm:flex items-center gap-5 mt-3">
-              <label
-                className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base"
-                htmlFor=""
-              >
-                Firm Status
-              </label>
-              <input
-                className="w-full border py-1 px-2 rounded-[2px] mt-1 sm:mt-0"
-                type=""
-                placeholder=""
-                name=""
-                id=""
-              />
-            </div>
-            <CustomSelect />
-            <CustomSelect />
+            <CustomSelect
+              label="Firm Status"
+              id="firmStatus"
+              arr={underLedgerData}
+              formData={formData}
+              setFormData={setFormData}
+            />
+            <CustomSelect
+              label="Territory"
+              id="territory"
+              arr={underLedgerData}
+              formData={formData}
+              setFormData={setFormData}
+            />
+            <CustomSelect
+              label="Vendor Category"
+              id="vendorCategory"
+              arr={underLedgerData}
+              formData={formData}
+              setFormData={setFormData}
+            />
             <div className="sm:flex items-center gap-5 mt-3">
               <label
                 className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base"
@@ -173,7 +196,11 @@ const Form = () => {
             </div>
           </div>
           <div className="lg:w-[30%] w-full mt-5 lg:mt-0">
-            <ImageUpload />
+            <ImageUpload
+              setFormData={setFormData}
+              imgUrl="imgUrl"
+              formData={formData}
+            />
           </div>
         </div>
         <div className="text-center mt-10">

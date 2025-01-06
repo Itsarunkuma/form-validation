@@ -16,7 +16,6 @@ const VendorToggle = ({ formData, setFormData }) => {
               setFormData({ ...formData, vendorCommon: e.target.value })
             }
             type="checkbox"
-            value="None"
             id="common_vendor"
             name="check"
             checked={formData.vendorCommon}
@@ -37,7 +36,6 @@ const VendorToggle = ({ formData, setFormData }) => {
               setFormData({ ...formData, subVendor: e.target.value })
             }
             type="checkbox"
-            value="None"
             id="vendor"
             name="check2"
             checked={formData.subVendor}

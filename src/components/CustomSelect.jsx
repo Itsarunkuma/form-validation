@@ -1,55 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PencilIcon, SelectArrow } from "./Icons";
 
-const CustomSelect = ({
-  label = "Select Option",
-  placeholder = "Select ...",
-  options = [],
-  onSelect,
-  allowSearch = true,
-}) => {
+const CustomSelect = ({ label, id, arr, formData, setFormData }) => {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
+  const [write, setWrite] = useState(false);
   const [selected, setSelected] = useState("");
 
-  const filteredOptions = options.filter((option) =>
-    option.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredOptions =
+    arr &&
+    arr.filter((option) => option.toLowerCase().includes(search.toLowerCase()));
 
   const handleSelect = (option) => {
     setSelected(option);
-    setSearch(""); // Reset search field
-    setShow(false); // Hide dropdown
-    if (onSelect) onSelect(option); // Pass selected option to parent
+    setShow(false);
   };
+
+  useEffect(() => {
+    if (search !== "") {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [search]);
 
   return (
     <div className="sm:flex items-center gap-5 mt-3">
       <label
         className="lg:min-w-[300px] sm:min-w-[200px] min-w-[100px] text-[14px] sm:text-base"
-        htmlFor=""
+        htmlFor={id}
       >
         {label}
       </label>
       <div className="flex w-full gap-1">
         <div className="border w-full rounded-[2px] relative mt-1 sm:mt-0">
           <div className="flex items-center px-3 py-1">
-            {allowSearch ? (
+            {write ? (
               <input
-                id="select"
-                type="text"
-                value={search || selected}
                 onChange={(e) => setSearch(e.target.value)}
-                onClick={() => setShow(true)}
-                placeholder={placeholder}
-                className="w-full outline-none text-[14px] text-[#000]"
+                type="text"
+                placeholder="Type here..."
+                id={id}
+                className="border-none w-full outline-none"
               />
             ) : (
               <p
                 onClick={() => setShow(!show)}
-                className="w-full cursor-pointer text-[14px] text-[#9CA3AF]"
+                className="w-full cursor-pointer text-[14px] "
               >
-                {selected || placeholder}
+                {selected || <span className="text-[#9CA3AF]">Select ...</span>}
               </p>
             )}
             <span
@@ -67,7 +66,11 @@ const CustomSelect = ({
                 filteredOptions.map((option, index) => (
                   <li
                     key={index}
-                    onClick={() => handleSelect(option)}
+                    onClick={() => {
+                      handleSelect(option);
+                      setFormData({ ...formData, [id]: option });
+                      setWrite(false);
+                    }}
                     className="cursor-pointer px-3 py-1 hover:bg-gray-200 text-[14px]"
                   >
                     {option}
@@ -76,7 +79,10 @@ const CustomSelect = ({
               ) : (
                 <li
                   className="px-1 py-1 text-gray-500 text-[14px]"
-                  onClick={() => handleSelect("")}
+                  onClick={() => {
+                    handleSelect("");
+                    setWrite(false);
+                  }}
                 >
                   No options found
                 </li>
@@ -86,7 +92,8 @@ const CustomSelect = ({
         </div>
         <div className="flex gap-1">
           <label
-            id="select"
+            onClick={() => setWrite(true)}
+            id={id}
             className="bg-blue-900 p-[6px] rounded-[2px] flex flex-col justify-center items-center cursor-pointer"
           >
             <PencilIcon />
