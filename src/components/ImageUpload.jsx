@@ -3,7 +3,7 @@ import { CrossIcon } from "./Icons";
 
 const ImageUpload = () => {
   return (
-    <div className="border max-w-[300px] mx-auto">
+    <div className="border max-w-[300px] lg:mx-auto">
       <div className="bg-red-400 h-[200px] w-full relative ">
         <span className="absolute top-[-10px] right-[-10px] cursor-pointer">
           <CrossIcon />
